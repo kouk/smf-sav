@@ -1,0 +1,64 @@
+#!/bin/sh
+# Startup script for smf-sav milter
+#
+# chkconfig: 2345 75 35
+# description: Run smf-sav milter that checks a sender's and recipient's address validity
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+[ -f /usr/local/sbin/smf-sav ] || exit 0
+
+prog="smf-sav"
+LOCKFILE=/var/lock/subsys/$prog
+
+start() {
+    echo -n $"Starting $prog: " 
+    daemon /usr/local/sbin/smf-sav
+    RETVAL=$?
+    touch $LOCKFILE
+    echo
+    return $RETVAL
+}
+
+stop() {
+    if test "x`pidof smf-sav`" != x; then
+	echo -n $"Stopping $prog: "
+	killproc smf-sav
+	echo
+    fi
+    RETVAL=$?
+    rm -f $LOCKFILE
+    return $RETVAL
+}
+
+case "$1" in
+	start)
+	    start
+	    ;;
+	
+	stop)
+	    stop
+	    ;;
+	
+	status)
+	    status smf-sav
+	    ;;
+	restart)
+	    stop
+	    start
+	    ;;
+	condrestart)
+	    if [ -f $LOCKFILE ]; then
+		stop
+		start
+	    fi
+	    ;;
+	
+	*)
+	    echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+	    exit 1
+
+esac
+
+exit $RETVAL

@@ -1,0 +1,111 @@
+Sun Apr 08 2012 (Gabriele Maria Plutzar)
+===============
+
+smf-sav-reloaded v 2.0
+
+As the original Author Eugene Kurmanin has no interest in this widely 
+used software any more, and didn't fix any bug, I release a "reloaded"
+version with heavy bugfixes.
+
+  + SMTP Callback function is now 100% RFC compliant, beeing
+    able to cope with any nowadays used anti-spam-traps.
+    Multiline replys / greetings are handled correctly.
+    Replys split up into severaly pakets are handled correctly.
+  + Race condition with two servers both using SAV is solved.
+    Sender email adress is checked AFTER the data command, so any
+    system doing sav on a server using smf-sav wont be checked back.    
+
+Info for compiling: If you get a smfi_register startup error, change line 
+1408 for temporary solution
+
+
+Wed Oct 25 2006 (ek)
+====================
+smf-sav v1.4.0
+
+  + whitelist by a PTR (reverse DNS) record
+    was implemented
+  + whitelist by an envelope recipient
+    e-Mail address was implemented
+  + option to ignore tempfailed results of SAV
+    was implemented
+  + option to refuse e-Mail messages from systems
+    that don't accept the null reverse-path <>
+    was implemented
+  + tempfail and fail results TTL settings
+    were segregated
+  + progressive slowdown of recipient's e-Mail
+    address brute force attacks was implemented
+  + MX records sorting algorithm was slightly improved
+  ! stall feature was reimplemented via select() call
+  - connect parameter was removed
+  + some code cleanups were made
+  + TODO tasks were revised
+  + cosmetic enhancements were made
+
+Tue Sep 12 2006 (ek)
+====================
+smf-sav v1.3.2
+
+  ! build fix on Solaris
+  + new TODO tasks were added
+  + minor cosmetic enhancements were made
+
+Tue Sep 05 2006 (ek)
+====================
+smf-sav v1.3.1
+
+ ! small issue with dot-decimal notation
+   MX records was fixed
+ + minor cosmetic enhancements were made
+
+Wed Aug 30 2006 (ek)
+====================
+smf-sav v1.3.0
+
+ + whitelists by an IP address (CIDR notation)
+   was implemented
+ + whitelists by an envelope sender address
+   was implemented
+ + scalable fast in-memory cache engine
+   with TTL settings was implemented
+ + Sendmail mailertable dot-decimal notation
+   records now fully supported
+ + MailStore parameter now supports a dot-decimal
+   notation value
+ + Sender e-Mail Address Verification can be
+   disabled now
+ + time calculation for an Recipient e-Mail Address
+   Verification was implemented
+ + command line switch for a redefinition of the
+   default place of the configuration file was added
+ ! Connect parameter marked as deprecated
+ ! default working directory and the default place
+   of a configuration file were changed to meet standards
+ + new TODO tasks were added
+
+Tue Aug 15 2006 (ek)
+====================
+smf-sav v1.2.0
+
+ + initial support of an external configuration
+   file was implemented
+ ! use a thread-safe resolver API under Solaris
+ ! use the BIND v8 thread-safe resolver instead
+   a non thread-safe resolver under FreeBSD
+ + new TODO tasks were added
+
+Tue Aug 08 2006 (ek)
+====================
+smf-sav v1.1.0
+
+ + Sendmail mailertable and virtusertable
+   features support for an Recipient e-Mail
+   Address Verification was implemented
+ + new TODO tasks were added
+
+Wed Jul 12 2006 (ek)
+====================
+smf-sav v1.0.0
+
+ * public release
